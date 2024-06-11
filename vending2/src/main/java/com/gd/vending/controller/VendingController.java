@@ -24,10 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class VendingController {
 	@Autowired
 	VendingService vendingService;
-	@Autowired
-	VendingMapper vendingMapper;
 	
 	
+	// 음료수 리스트 출력
 	@GetMapping("/Vending")
 	public String drinkList(Model model) {
 				
@@ -37,22 +36,23 @@ public class VendingController {
 	}
 	
 	
-			// 	ajax 호출 테스트
-			@RequestMapping(value = "/Vending", method = {RequestMethod.POST})
-			//@PostMapping("/Vending")
-			@ResponseBody // << json 으로 변환해서 반환시켜줌
-			public List<Vending>  ajaxTest(Model model , @RequestParam("name") String  name) {
-				System.out.println("받은 이름: " + name);
-				
-				vendingMapper.drinkSale(name);
-				List<Vending> list = vendingMapper.selectDrink();
-			    log.debug("데이터확인"+list);
+ 
+	// ajax로 호출받음, 구입이 일어나면 db의 재고가 줄어들고 db리스트 다시 전달. 
+	@RequestMapping(value = "/Vending", method = {RequestMethod.POST})
+	//@PostMapping("/Vending")
+	@ResponseBody // << json 으로 변환해서 반환시켜줌
+	public List<Vending>  ajaxTest(Model model , @RequestParam("name") String  name) {
+		System.out.println("받은 이름: " + name);
+		
+		vendingService.drinkSale(name);
+		List<Vending> list = vendingService.selectDrink();
+	    log.debug("데이터확인"+list);
 //				model.addAttribute("vending", vendingMapper.selectDrink());
 //				log.debug("리스트" + vendingMapper.selectDrink());
 //				ModelAndView mv = new ModelAndView();
 //				mv.addObject("testJson", "ajaxTest");
 //				mv.setViewName("/view/Vending");
-				return list; 
+		return list; 
 			}
 	
 }

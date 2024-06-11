@@ -11,6 +11,4 @@ public interface VendingMapper {
 	
 	 List<Vending> selectDrink();
 	 void drinkSale(String drink);
-	 
-	
 }
