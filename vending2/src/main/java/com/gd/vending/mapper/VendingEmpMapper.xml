@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.vending.mapper.VendingEmpMapper">
+	<insert id="insertDrink" parameterType="com.gd.vending.dto.Vending">
+		INSERT INTO vending(drink,amount,price) VALUES(#{drink} , #{amount} ,#{price});
+	</insert>
+
+	<select id="selectOne" parameterType="String" resultType="com.gd.vending.dto.Vending">
+		SELECT drink , amount , price FROM vending WHERE drink = '${drink}';
+	</select>
+
+	<update id="updateDrink" parameterType="com.gd.vending.dto.Vending">
+		UPDATE vending SET  amount = ${amount} , price = ${price} WHERE drink = '${drink}'; 
+	</update>
+	
+	<delete id="deleteDrink">
+		DELETE FROM vending WHERE drink = '${drink}';
+	</delete>
+</mapper>
