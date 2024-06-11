@@ -87,12 +87,12 @@
 		
 		<script type="text/javascript">
 		
-		var drink = ""; //음료수 
+		let drink = ""; //음료수 
 		let drinkPrice = 0; //음료수 가격 
 		let index = 0; //
 		let changeAmount = 0; // 
 		let currentBalance = 0; // 현재 잔액 변수 초기화
-		var msg = ""; // 메세지 변수
+		let msg = ""; // 메세지 변수
 		
 		function select() {
 			const selectedRadio = document.querySelector('input[type="radio"]:checked')
