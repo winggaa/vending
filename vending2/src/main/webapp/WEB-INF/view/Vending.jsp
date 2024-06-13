@@ -87,20 +87,35 @@
 		
 		<script type="text/javascript">
 		
+		// 로컬스토리지에 저장한 값이 있으면 가져옴
+		let userBalance = Number(localStorage.getItem('userBalance'));
 		let drink = ""; //음료수 
 		let drinkPrice = 0; //음료수 가격 
-		let index = 0; //
 		let changeAmount = 0; // 
 		let currentBalance = 0; // 현재 잔액 변수 초기화
 		let msg = ""; // 메세지 변수
+		
+		// 값이 없을 때 처리
+		if (userBalance === null) {
+		    console.log('저장된값 X');
+		} else {
+			
+		    currentBalance = userBalance ;
+		    
+		    console.log("로컬스토리지 	저장된값:" + currentBalance + typeof(currentBalance) + typeof(userBalance));    
+		
+		    document.getElementById("balance").textContent = currentBalance;
+		}
+		
+		
 		
 		function select() {
 			const selectedRadio = document.querySelector('input[type="radio"]:checked')
 			if (selectedRadio) {
 			count = selectedRadio.id;
-			console.log(index);
 			// 체크된 라디오버튼에서 value가져옴 <-- 음료수이름
 	   		drink = selectedRadio.value;
+			
 	   		// 체크된 라디오버튼에서 음료수 가격을 가져옴 // 맨뒤 10은 진수타입 생략가능
 	   	 	drinkPrice = parseInt(selectedRadio.getAttribute('data-price'), 10);
 	   		
@@ -138,20 +153,25 @@
 				// ajax 통신 성공시 호출
 				console.log("성공");
 				console.log(list);
+				
 				// 가져온 list 에서 select()에서 가져온 drink와 같은값을 찾고 그 drink의 amount를 가져옴
-				const amount = list.find(obj => obj.drink === drink).amount;
+				const amount = list.find(obj => obj.drink === drink).amount;	// 1. < -- 생략하고
 				console.log("구입후남은재고: "+amount); 
 				
 				// 현재충전금액 - 음료수값 
 				// 계산된값 표시
 			 	currentBalance -= drinkPrice;
 				console.log(currentBalance);
+				// 로컬스토리지에 구매후 남은값  저장
+				localStorage.setItem('userBalance', currentBalance);
 				document.getElementById("balance").textContent = currentBalance;
 				// 구입후 재고가 0이되면 품절로 바꾸고 checked 해제 drink 초기화
 				if(amount > 0){
 				
 				// 선택된 음료수의 재고수 새로받아온 list의 값으로변경    	
-				document.getElementById(drink).textContent = amount;
+				document.getElementById(drink).textContent = amount; //2. <-- list를 forEach로 뽑아서 모든 목록의재고 상태를 업데이트 가능함 
+																	 //     
+				
 				msg= drink +"를(을) 구입하셨습니다.";
 				} else{
 					// 재고수가 1 이상이 아니면 품절표시후 체크해제 , 선택불가
@@ -178,6 +198,9 @@
         function chargeAmount(amount) {
 			if( (currentBalance + amount) <= 50000){
             currentBalance += amount; // 현재 잔액에 금액 추가
+            
+            // 로컬스토리지에 충전금액 저장.
+            localStorage.setItem('userBalance', currentBalance);
 			} else{
 				msg="50000원이상은 충전이 불가합니다.";
 			}
@@ -190,8 +213,6 @@
             document.getElementById("msg").textContent = msg;
         }
         
-        
-
         function changeReturn() {
             // 현재 잔액 계산
             currentBalance = parseInt(document.getElementById("balance").textContent);
@@ -201,12 +222,13 @@
 
             // 잔액 0으로 설정
             currentBalance = 0;
+            // 돈을 반환했으므로 로컬스토리지에 0저장
+            localStorage.setItem('userBalance', currentBalance);
             document.getElementById("balance").textContent = currentBalance;
-            
             // 잔돈 개수 입력
             document.getElementById("msg").textContent = "잔돈 " + changeAmount + "원이 반환되었습니다.";
         }
-        
+        	
 		</script>	
 			
 		
