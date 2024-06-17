@@ -6,7 +6,8 @@
 		SELECT drink , amount , price FROM vending
 	</select>
 
-	<update id="drinkSale"  parameterType="String" >
+	<update id="drinkSale"  parameterType= "com.gd.vending.dto.Vending">
 		UPDATE vending SET amount = amount -1 WHERE drink = '${drink}';
+		
 	</update>
 </mapper>

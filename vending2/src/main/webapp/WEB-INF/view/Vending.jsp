@@ -9,11 +9,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+	<div">
+	<div style=" width:400px; margin: 0 auto ;">
 	<h1>vending</h1>
-	
 	<%-- <form action="${pageContext.request.contextPath}/Vending" id="drinkForm" method="post"> --%>
 		<h2 style="margin-bottom: 5px;">
 			금액충전
@@ -80,11 +82,11 @@
 		 <div>
 		 	<button type="button"  onclick="changeReturn()">잔돈반환</button>
 		 </div>
-		 
+		 <a href="${pageContext.request.contextPath}/VendingEmp">관리자모드</a>
 	<!-- </form> -->
-		
+		</div>
 			    
-		
+		</div>
 		<script type="text/javascript">
 		
 		// 로컬스토리지에 저장한 값이 있으면 가져옴
@@ -99,11 +101,8 @@
 		if (userBalance === null) {
 		    console.log('저장된값 X');
 		} else {
-			
 		    currentBalance = userBalance ;
-		    
 		    console.log("로컬스토리지 	저장된값:" + currentBalance + typeof(currentBalance) + typeof(userBalance));    
-		
 		    document.getElementById("balance").textContent = currentBalance;
 		}
 		

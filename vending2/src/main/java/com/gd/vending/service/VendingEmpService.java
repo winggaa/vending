@@ -29,7 +29,7 @@ public class VendingEmpService {
 	}
 	
 	// 파라미터 음료수의 재고 , 가격 수정 
-	public void updateOne(String drink , String amount , String price) {
+	public void updateDrink(String drink , int amount , int price) {
 		
 		vendingEmpMapper.updateDrink(drink , amount , price);
 		

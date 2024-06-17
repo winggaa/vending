@@ -11,7 +11,8 @@ public class Vending {
 	
 	private int No;
 	private String drink;
-	private int amount;
-	private int price;
+	private String amount;
+	private String price;
+	
 	
 }

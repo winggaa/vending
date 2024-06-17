@@ -9,7 +9,9 @@ import com.gd.vending.dto.Vending;
 @Mapper
 public interface VendingEmpMapper {
 	List<Vending> selectOne(String drink);
-	void updateDrink(String drink , String amount , String price);
+	
+	
+	void updateDrink(String drink , int amount , int price);	
 	void deleteDrink(String drink);
 	void insertDrink(String drink, int amount , int price);
 }

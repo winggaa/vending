@@ -10,7 +10,16 @@
 	</select>
 
 	<update id="updateDrink" parameterType="com.gd.vending.dto.Vending">
-		UPDATE vending SET  amount = ${amount} , price = ${price} WHERE drink = '${drink}'; 
+		UPDATE vending SET
+		<choose> 
+		 	<when test="amount != 0 and price != 0 and amount != null and price !=null">
+				amount = ${amount} , price = ${price} 
+			</when>
+			<otherwise>
+				amount = amount -1
+			</otherwise>
+		</choose>
+		WHERE drink = '${drink}';
 	</update>
 	
 	<delete id="deleteDrink">

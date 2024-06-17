@@ -2,19 +2,19 @@ package com.gd.vending.controller;
 
 import java.util.List;
 
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gd.vending.dto.Vending;
-import com.gd.vending.mapper.VendingMapper;
+import com.gd.vending.service.VendingEmpService;
 import com.gd.vending.service.VendingService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +24,15 @@ import lombok.extern.slf4j.Slf4j;
 public class VendingController {
 	@Autowired
 	VendingService vendingService;
+	
+	@Autowired
+	VendingEmpService vendingEmpService;	
+	
+	@PostMapping("/vendingFile")
+	public void fileUpload(@RequestParam ("file") MultipartFile file) {
+		
+		log.debug(file.getName() + file.getContentType() + file.getSize() + file.getOriginalFilename());
+	}
 	
 	
 	// 음료수 리스트 출력
@@ -45,7 +54,9 @@ public class VendingController {
 		System.out.println("받은 이름: " + name);
 		
 		vendingService.drinkSale(name);
+		
 		List<Vending> list = vendingService.selectDrink();
+		
 	    log.debug("데이터확인"+list);
 //				model.addAttribute("vending", vendingMapper.selectDrink());
 //				log.debug("리스트" + vendingMapper.selectDrink());
@@ -53,6 +64,6 @@ public class VendingController {
 //				mv.addObject("testJson", "ajaxTest");
 //				mv.setViewName("/view/Vending");
 		return list; 
-			}
+	}
 	
 }
