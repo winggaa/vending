@@ -61,8 +61,8 @@
 		<button type="submit">음료수 추가하기</button>
 	</form>
 	<form action="${pageContext.request.contextPath}/vendingFile" method="post" enctype="multipart/form-data">
-	<input type="file" name="file">
-	<button type="submit">전송하기</button>
+	<!-- <input type="file" name="file">
+	<button type="submit">전송하기</button> -->
 	</form>
 	</div>
 	<div>

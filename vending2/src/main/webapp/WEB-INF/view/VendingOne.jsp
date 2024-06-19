@@ -27,6 +27,7 @@
 					<td>
 						<input type="number" name="price" value="${o.price}" min=0 >
 					</td>
+					
 					<td>
 						<input type="number" name="amount" value="${o.amount}"  min=0 max= 99>
 					</td>
@@ -34,8 +35,10 @@
 				</c:forEach>
 			</tr>
 		</table>
+					
 		<button type="submit">수정하기</button>
 	</form>
+	<span>${error}</span>
 	<form action="vendingDelete" method="post">
 		<c:forEach var="o" items="${one}">
 		<input type="hidden" name="drink" value="${o.drink}">

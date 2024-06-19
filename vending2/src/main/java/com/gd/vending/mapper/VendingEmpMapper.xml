@@ -13,7 +13,9 @@
 		UPDATE vending SET
 		<choose> 
 		 	<when test="amount != 0 and price != 0 and amount != null and price !=null">
-				amount = ${amount} , price = ${price} 
+				amount = ${amount}
+				
+				 , price = ${price} 
 			</when>
 			<otherwise>
 				amount = amount -1
